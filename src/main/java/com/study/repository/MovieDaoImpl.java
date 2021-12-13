@@ -13,6 +13,8 @@ import java.util.List;
 public class MovieDaoImpl implements MovieDao{
     private static final String GET_ALL_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
             "picture_path FROM movies;";
+    private static final String GET_RANDOM_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
+            "picture_path FROM movies ORDER BY random() LIMIT 3;";
     private static final RowMapper<Movie> MOVIE_ROW_MAPPER = new MOVIE_ROW_MAPPER();
 
     private JdbcTemplate jdbcTemplate;
@@ -24,6 +26,11 @@ public class MovieDaoImpl implements MovieDao{
     @Override
     public List<Movie> findAll() {
         return jdbcTemplate.query(GET_ALL_MOVIES, MOVIE_ROW_MAPPER);
+    }
+
+    @Override
+    public List<Movie> getRandom() {
+        return jdbcTemplate.query(GET_RANDOM_MOVIES, MOVIE_ROW_MAPPER);
     }
 
     private static class MOVIE_ROW_MAPPER implements RowMapper<Movie> {

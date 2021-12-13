@@ -15,12 +15,14 @@ public class MovieServiceImpl implements MovieService {
         this.movieDao = movieDao;
     }
 
-    //    public MovieServiceImpl(MovieDao movieDao) {
-//        this.movieDao = movieDao;
-//    }
-
     public List<Movie> findAll() {
         return movieDao.findAll();
     }
+
+    @Override
+    public List<Movie> getRandom() {
+        return movieDao.getRandom();
+    }
+
 
 }

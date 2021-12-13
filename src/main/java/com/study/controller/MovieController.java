@@ -26,4 +26,8 @@ public class MovieController {
         return movieService.findAll();
     }
 
+    @GetMapping(value = "/random", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Movie> randomMovies() {
+        return movieService.getRandom();
+    }
 }

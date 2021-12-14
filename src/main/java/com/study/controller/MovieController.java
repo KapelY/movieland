@@ -12,16 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/movie")
-@Slf4j
+@RequestMapping("/movie")
 public class MovieController {
-    private MovieService movieService;
+    private final MovieService movieService;
 
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Movie> findAll() {
         return movieService.findAll();
     }

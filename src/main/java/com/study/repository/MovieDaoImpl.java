@@ -17,7 +17,7 @@ public class MovieDaoImpl implements MovieDao{
             "picture_path FROM movies ORDER BY random() LIMIT 3;";
     private static final RowMapper<Movie> MOVIE_ROW_MAPPER = new MOVIE_ROW_MAPPER();
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public MovieDaoImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

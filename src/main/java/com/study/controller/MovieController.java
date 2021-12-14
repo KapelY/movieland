@@ -3,7 +3,6 @@ package com.study.controller;
 
 import com.study.entity.Movie;
 import com.study.service.MovieService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

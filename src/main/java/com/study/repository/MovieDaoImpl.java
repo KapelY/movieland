@@ -11,13 +11,13 @@ import java.util.List;
 
 @Repository
 public class MovieDaoImpl implements MovieDao{
-    private static final String GET_ALL_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
+    public static final String GET_ALL_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
             "picture_path FROM movies;";
-    private static final String GET_RANDOM_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
+    public static final String GET_RANDOM_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
             "picture_path FROM movies ORDER BY random() LIMIT 3;";
-    private static final RowMapper<Movie> MOVIE_ROW_MAPPER = new MOVIE_ROW_MAPPER();
+    public static final RowMapper<Movie> MOVIE_ROW_MAPPER = new MOVIE_ROW_MAPPER();
 
-    private final JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     public MovieDaoImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -33,7 +33,7 @@ public class MovieDaoImpl implements MovieDao{
         return jdbcTemplate.query(GET_RANDOM_MOVIES, MOVIE_ROW_MAPPER);
     }
 
-    private static class MOVIE_ROW_MAPPER implements RowMapper<Movie> {
+    public static class MOVIE_ROW_MAPPER implements RowMapper<Movie> {
         @Override
         public Movie mapRow(ResultSet rs, int rowNum) throws SQLException {
             long id = rs.getLong("id");

@@ -29,7 +29,7 @@ public class MovieController {
     }
 
     @GetMapping(value = "/genre/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Movie> randomMovies(@PathVariable int id) {
+    public List<Movie> moviesByGenre(@PathVariable int id) {
         return movieService.getMoviesByGenre(id);
     }
 }

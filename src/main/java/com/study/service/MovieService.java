@@ -9,4 +9,5 @@ import java.util.List;
 public interface MovieService {
     List<Movie> findAll();
     List<Movie> getRandom();
+    List<Movie> getMoviesByGenre(int id);
 }

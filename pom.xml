@@ -94,7 +94,6 @@
             <version>2.2</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -103,6 +102,12 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>8.2.1</version>
+                <configuration>
+                    <url>jdbc:postgresql://localhost:5432/movieland</url>
+                    <user>test</user>
+                    <password>password</password>
+                    <baselineOnMigrate>true</baselineOnMigrate>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

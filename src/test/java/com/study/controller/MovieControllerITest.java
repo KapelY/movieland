@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -46,11 +45,9 @@ class MovieControllerITest {
             Movie.builder().id(2L).nameRussian("Гладиатор").nameNative("Gladiator").build(),
             Movie.builder().id(3L).nameRussian("Бойцовский клуб").nameNative("Fight Club").build()
     );
+
     @Autowired
     private MovieController movieController;
-
-    @MockBean
-    private JdbcTemplate jdbcTemplate;
 
     @Autowired
     private MovieService movieService;

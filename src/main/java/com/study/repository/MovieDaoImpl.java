@@ -1,6 +1,7 @@
 package com.study.repository;
 
 import com.study.entity.Movie;
+import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -10,18 +11,15 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public class MovieDaoImpl implements MovieDao{
+@AllArgsConstructor
+public class MovieDaoImpl implements MovieDao {
     public static final String GET_ALL_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
             "picture_path FROM movies;";
     public static final String GET_RANDOM_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
             "picture_path FROM movies ORDER BY random() LIMIT 3;";
-    public static final RowMapper<Movie> MOVIE_ROW_MAPPER = new MOVIE_ROW_MAPPER();
+    public static final RowMapper<Movie> MOVIE_ROW_MAPPER = new MovieRowMapper();
 
     private JdbcTemplate jdbcTemplate;
-
-    public MovieDaoImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     @Override
     public List<Movie> findAll() {
@@ -33,7 +31,7 @@ public class MovieDaoImpl implements MovieDao{
         return jdbcTemplate.query(GET_RANDOM_MOVIES, MOVIE_ROW_MAPPER);
     }
 
-    public static class MOVIE_ROW_MAPPER implements RowMapper<Movie> {
+    public static class MovieRowMapper implements RowMapper<Movie> {
         @Override
         public Movie mapRow(ResultSet rs, int rowNum) throws SQLException {
             long id = rs.getLong("id");

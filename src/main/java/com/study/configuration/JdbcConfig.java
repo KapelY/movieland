@@ -1,11 +1,12 @@
 package com.study.configuration;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
@@ -17,13 +18,16 @@ public class JdbcConfig {
     public DataSource dataSource(@Value("${db.driver}") String driver,
                                  @Value("${db.url}") String url,
                                  @Value("${db.username}") String username,
-                                 @Value("${db.password}") String password) {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(driver);
-        dataSource.setUrl(url);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
-        return dataSource;
+                                 @Value("${db.password}") String password,
+                                 @Value("${db.maximumPoolSize}") int maximumPoolSize) {
+        HikariConfig hikariConfig = new HikariConfig();
+        hikariConfig.setDriverClassName(driver);
+        hikariConfig.setJdbcUrl(url);
+        hikariConfig.setUsername(username);
+        hikariConfig.setPassword(password);
+        hikariConfig.setMaximumPoolSize(maximumPoolSize);
+
+        return new HikariDataSource(hikariConfig);
     }
 
     @Bean

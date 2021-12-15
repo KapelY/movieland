@@ -7,5 +7,5 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @ComponentScan("com.study.controller")
 @EnableWebMvc
-public class MovielandConfiguration {
+public class WebConfiguration {
 }

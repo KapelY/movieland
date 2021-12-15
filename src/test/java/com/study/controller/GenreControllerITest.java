@@ -69,22 +69,14 @@ class GenreControllerITest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.[0].id",
-                        Matchers.not(Matchers.hasValue(1))))
-                .andExpect(jsonPath("$.[0].name",
-                        Matchers.not(Matchers.hasValue("драма"))))
-                .andExpect(jsonPath("$.[1].id",
-                        Matchers.not(Matchers.hasValue(2))))
-                .andExpect(jsonPath("$.[1].name",
-                        Matchers.not(Matchers.hasValue("криминал"))))
-                .andExpect(jsonPath("$.[2].id",
-                        Matchers.not(Matchers.hasValue("3"))))
-                .andExpect(jsonPath("$.[2].name",
-                        Matchers.not(Matchers.hasValue("фэнтези"))))
-                .andExpect(jsonPath("$.[3].id",
-                        Matchers.not(Matchers.hasValue("4"))))
-                .andExpect(jsonPath("$.[3].name",
-                        Matchers.not(Matchers.hasValue("детектив"))));
+                .andExpect(jsonPath("$.[0].id", Matchers.is(1)))
+                .andExpect(jsonPath("$.[0].name", Matchers.is("драма")))
+                .andExpect(jsonPath("$.[1].id", Matchers.is(2)))
+                .andExpect(jsonPath("$.[1].name", Matchers.is("криминал")))
+                .andExpect(jsonPath("$.[2].id", Matchers.is(3)))
+                .andExpect(jsonPath("$.[2].name", Matchers.is("фэнтези")))
+                .andExpect(jsonPath("$.[3].id", Matchers.is(4)))
+                .andExpect(jsonPath("$.[3].name", Matchers.is("детектив")));
     }
 
     @Configuration

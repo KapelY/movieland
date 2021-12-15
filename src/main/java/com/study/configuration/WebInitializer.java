@@ -10,7 +10,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{MovielandConfiguration.class};
+        return new Class[]{WebConfiguration.class};
     }
 
     @Override

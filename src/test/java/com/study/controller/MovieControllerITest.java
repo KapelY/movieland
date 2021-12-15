@@ -64,45 +64,47 @@ class MovieControllerITest {
     @Test
     void findAll() {
         when(movieService.findAll()).thenReturn(list);
-        mockMvc.perform(get("/movie/")
-                        .accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/movie/").accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.[0].id",
-                        Matchers.not(Matchers.hasValue(1))))
-                .andExpect(jsonPath("$.[0].nameNative",
-                        Matchers.not(Matchers.hasValue("Il bisbetico domato"))))
-                .andExpect(jsonPath("$.[1].id",
-                        Matchers.not(Matchers.hasValue(2))))
-                .andExpect(jsonPath("$.[1].nameNative",
-                        Matchers.not(Matchers.hasValue("Gladiator"))))
-                .andExpect(jsonPath("$.[2].id",
-                        Matchers.not(Matchers.hasValue("3"))))
-                .andExpect(jsonPath("$.[2].nameNative",
-                        Matchers.not(Matchers.hasValue("Fight Club"))));
+                .andExpect(jsonPath("$.[0].id", Matchers.is(1)))
+                .andExpect(jsonPath("$.[0].nameNative", Matchers.is("Il bisbetico domato")))
+                .andExpect(jsonPath("$.[1].id", Matchers.is(2)))
+                .andExpect(jsonPath("$.[1].nameNative", Matchers.is("Gladiator")))
+                .andExpect(jsonPath("$.[2].id", Matchers.is(3)))
+                .andExpect(jsonPath("$.[2].nameNative", Matchers.is("Fight Club")));
     }
 
     @SneakyThrows
     @Test
     void randomMovies() {
         when(movieService.getRandom()).thenReturn(listOfThree);
-        mockMvc.perform(get("/movie/random")
-                        .accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/movie/random").accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.[0].id",
-                        Matchers.not(Matchers.hasValue(1))))
-                .andExpect(jsonPath("$.[0].nameNative",
-                        Matchers.not(Matchers.hasValue("Forrest Gump"))))
-                .andExpect(jsonPath("$.[1].id",
-                        Matchers.not(Matchers.hasValue(2))))
-                .andExpect(jsonPath("$.[1].nameNative",
-                        Matchers.not(Matchers.hasValue("Gladiator"))))
-                .andExpect(jsonPath("$.[2].id",
-                        Matchers.not(Matchers.hasValue("3"))))
-                .andExpect(jsonPath("$.[2].nameNative",
-                        Matchers.not(Matchers.hasValue("Fight Club"))));
+                .andExpect(jsonPath("$.[0].id", Matchers.is(1)))
+                .andExpect(jsonPath("$.[0].nameNative", Matchers.is("Forrest Gump")))
+                .andExpect(jsonPath("$.[1].id", Matchers.is(2)))
+                .andExpect(jsonPath("$.[1].nameNative", Matchers.is("Gladiator")))
+                .andExpect(jsonPath("$.[2].id", Matchers.is(3)))
+                .andExpect(jsonPath("$.[2].nameNative", Matchers.is("Fight Club")));
     }
+
+    @SneakyThrows
+    @Test
+    void moviesByGenre() {
+        when(movieService.getMoviesByGenre(1)).thenReturn(listOfThree);
+        mockMvc.perform(get("/movie/genre/1").accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.[0].id", Matchers.is(1)))
+                .andExpect(jsonPath("$.[0].nameNative", Matchers.is("Forrest Gump")))
+                .andExpect(jsonPath("$.[1].id", Matchers.is(2)))
+                .andExpect(jsonPath("$.[1].nameNative", Matchers.is("Gladiator")))
+                .andExpect(jsonPath("$.[2].id", Matchers.is(3)))
+                .andExpect(jsonPath("$.[2].nameNative", Matchers.is("Fight Club")));
+    }
+
 
     @Configuration
     public static class TestConfig {

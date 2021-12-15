@@ -1,6 +1,7 @@
-package com.study.repository;
+package com.study.repository.impl;
 
 import com.study.entity.Movie;
+import com.study.repository.MovieDao;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

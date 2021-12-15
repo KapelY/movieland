@@ -2,9 +2,9 @@ package com.study.controller;
 
 import com.study.entity.Movie;
 import com.study.repository.MovieDao;
-import com.study.repository.MovieDaoImpl;
+import com.study.repository.impl.MovieDaoImpl;
 import com.study.service.MovieService;
-import com.study.service.MovieServiceImpl;
+import com.study.service.impl.MovieServiceImpl;
 import lombok.SneakyThrows;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;

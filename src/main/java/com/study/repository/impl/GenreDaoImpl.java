@@ -1,6 +1,7 @@
-package com.study.repository;
+package com.study.repository.impl;
 
 import com.study.entity.Genre;
+import com.study.repository.GenreDao;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

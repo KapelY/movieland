@@ -1,15 +1,10 @@
 package com.study.controller;
 
 import com.study.entity.Genre;
-import com.study.entity.Movie;
 import com.study.repository.GenreDao;
-import com.study.repository.GenreDaoImpl;
-import com.study.repository.MovieDao;
-import com.study.repository.MovieDaoImpl;
+import com.study.repository.impl.GenreDaoImpl;
 import com.study.service.GenreService;
-import com.study.service.GenreServiceImpl;
-import com.study.service.MovieService;
-import com.study.service.MovieServiceImpl;
+import com.study.service.impl.GenreServiceImpl;
 import lombok.SneakyThrows;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,7 +24,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

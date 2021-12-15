@@ -1,7 +1,8 @@
-package com.study.service;
+package com.study.service.impl;
 
 import com.study.entity.Movie;
 import com.study.repository.MovieDao;
+import com.study.service.MovieService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

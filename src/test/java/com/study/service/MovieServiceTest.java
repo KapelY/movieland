@@ -2,17 +2,13 @@ package com.study.service;
 
 import com.study.entity.Movie;
 import com.study.repository.MovieDao;
-import com.study.repository.MovieDaoImpl;
+import com.study.repository.impl.MovieDaoImpl;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
-import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.study.repository.MovieDaoImpl.*;
+import static com.study.repository.impl.MovieDaoImpl.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

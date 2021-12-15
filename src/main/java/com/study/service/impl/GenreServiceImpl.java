@@ -1,7 +1,8 @@
-package com.study.service;
+package com.study.service.impl;
 
 import com.study.entity.Genre;
 import com.study.repository.GenreDao;
+import com.study.service.GenreService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

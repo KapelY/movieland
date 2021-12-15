@@ -6,6 +6,7 @@ import com.study.repository.impl.MovieDaoImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.Collections;
 import java.util.List;
 
 import static com.study.repository.impl.MovieDaoImpl.*;
@@ -32,7 +33,7 @@ class MovieServiceTest {
     @Test
     void findAll() {
         when(jdbcTemplate.query(GET_ALL_MOVIES, MOVIE_ROW_MAPPER)).thenReturn(list);
-        List<Movie> actual = movieDao.findAll();
+        List<Movie> actual = movieDao.findAll(Collections.emptyMap());
         assertEquals(4, actual.size());
         assertEquals("Гладиатор", actual.get(1).getNameRussian());
         assertEquals("Forrest Gump", actual.get(3).getNameNative());

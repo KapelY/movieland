@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
@@ -63,7 +64,7 @@ class MovieControllerITest {
     @SneakyThrows
     @Test
     void findAll() {
-        when(movieService.findAll()).thenReturn(list);
+        when(movieService.findAll(Collections.emptyMap())).thenReturn(list);
         mockMvc.perform(get("/movie/").accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())

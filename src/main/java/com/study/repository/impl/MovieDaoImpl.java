@@ -1,6 +1,8 @@
 package com.study.repository.impl;
 
 import com.study.entity.Movie;
+import com.study.entity.sorting.Fields;
+import com.study.entity.sorting.Order;
 import com.study.repository.MovieDao;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,12 +13,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
+import java.util.Map;
+import java.util.StringJoiner;
 
 @Repository
 @AllArgsConstructor
 public class MovieDaoImpl implements MovieDao {
     public static final String GET_ALL_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
-            "picture_path FROM movies;";
+            "picture_path FROM movies ORDER BY ";
     public static final String GET_RANDOM_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
             "picture_path FROM movies ORDER BY random() LIMIT 3;";
     public static final String GET_MOVIES_BY_GENRE = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
@@ -26,8 +30,10 @@ public class MovieDaoImpl implements MovieDao {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Movie> findAll() {
-        return jdbcTemplate.query(GET_ALL_MOVIES, MOVIE_ROW_MAPPER);
+    public List<Movie> findAll(Map<Fields, Order> map) {
+        StringJoiner stringJoiner = new StringJoiner(", ", GET_ALL_MOVIES, ";");
+        map.forEach((key, value) -> stringJoiner.add(key.getFieldName() + " " + value.getOrderValue()));
+        return jdbcTemplate.query(stringJoiner.toString(), MOVIE_ROW_MAPPER);
     }
 
     @Override

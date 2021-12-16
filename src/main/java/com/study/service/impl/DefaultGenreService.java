@@ -10,7 +10,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class GenreServiceImpl implements GenreService {
+public class DefaultGenreService implements GenreService {
     private GenreDao genreDao;
 
     @Override

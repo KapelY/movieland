@@ -2,9 +2,9 @@ package com.study.controller;
 
 import com.study.entity.Genre;
 import com.study.repository.GenreDao;
-import com.study.repository.impl.GenreDaoImpl;
+import com.study.repository.impl.DefaultGenreDao;
 import com.study.service.GenreService;
-import com.study.service.impl.GenreServiceImpl;
+import com.study.service.impl.DefaultGenreService;
 import lombok.SneakyThrows;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -82,12 +82,12 @@ class GenreControllerITest {
 
         @Bean
         public GenreDao genreDao() {
-            return new GenreDaoImpl(jdbcTemplate());
+            return new DefaultGenreDao(jdbcTemplate());
         }
 
         @Bean
         public GenreService genreService() {
-            return new GenreServiceImpl(genreDao());
+            return new DefaultGenreService(genreDao());
         }
 
         @Bean

@@ -18,7 +18,7 @@ import java.util.StringJoiner;
 
 @Repository
 @AllArgsConstructor
-public class MovieDaoImpl implements MovieDao {
+public class DefaultMovieDao implements MovieDao {
     public static final String GET_ALL_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
             "picture_path FROM movies ORDER BY ";
     public static final String GET_RANDOM_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
@@ -32,6 +32,9 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public List<Movie> findAll(Map<Fields, Order> map) {
         StringJoiner stringJoiner = new StringJoiner(", ", GET_ALL_MOVIES, ";");
+        if (map.isEmpty()) {
+            map.put(Fields.RATING, Order.ASC);
+        }
         map.forEach((key, value) -> stringJoiner.add(key.getFieldName() + " " + value.getOrderValue()));
         return jdbcTemplate.query(stringJoiner.toString(), MOVIE_ROW_MAPPER);
     }

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +15,11 @@ import java.util.List;
 @Slf4j
 @Service
 @Primary
-public class CachedGenreServiceImpl implements GenreService {
-    private final GenreServiceImpl genreService;
+public class CachedGenreService implements GenreService {
+    private final GenreService genreService;
     private volatile List<Genre> cache;
 
-    public CachedGenreServiceImpl(GenreServiceImpl genreService) {
+    public CachedGenreService(DefaultGenreService genreService) {
         this.genreService = genreService;
         cache = genreService.findAll();
     }
@@ -29,6 +30,7 @@ public class CachedGenreServiceImpl implements GenreService {
     }
 
     @Scheduled(cron = "* * 0/4 * * *")
+    @PostConstruct
     public void scheduleTaskUsingCronExpression() {
         cache = genreService.findAll();
         log.info("scheduled refresh genres using cron jobs at " + LocalDateTime.now());

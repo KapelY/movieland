@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 @AllArgsConstructor
-public class GenreDaoImpl implements GenreDao {
+public class DefaultGenreDao implements GenreDao {
     private static final String GET_ALL_GENRES = "SELECT id, name FROM genres;";
 
     private static final GenreRowMapper GENRE_ROW_MAPPER = new GenreRowMapper();
@@ -31,9 +31,7 @@ public class GenreDaoImpl implements GenreDao {
             long id = rs.getLong("id");
             String name = rs.getString("name");
 
-            return Genre.builder()
-                    .id(id)
-                    .name(name).build();
+            return new Genre(id,name);
         }
     }
 }

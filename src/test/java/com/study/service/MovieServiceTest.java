@@ -2,21 +2,21 @@ package com.study.service;
 
 import com.study.entity.Movie;
 import com.study.repository.MovieDao;
-import com.study.repository.impl.MovieDaoImpl;
+import com.study.repository.impl.DefaultMovieDao;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.Collections;
 import java.util.List;
 
-import static com.study.repository.impl.MovieDaoImpl.*;
+import static com.study.repository.impl.DefaultMovieDao.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class MovieServiceTest {
     private final JdbcTemplate jdbcTemplate = mock(JdbcTemplate.class);
-    private final MovieDao movieDao = new MovieDaoImpl(jdbcTemplate);
+    private final MovieDao movieDao = new DefaultMovieDao(jdbcTemplate);
 
     List<Movie> list = List.of(
             Movie.builder().id(1L).nameRussian("Укрощение строптивого").nameNative("Il bisbetico domato").build(),

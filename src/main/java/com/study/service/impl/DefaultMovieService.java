@@ -14,7 +14,7 @@ import java.util.Map;
 
 @AllArgsConstructor
 @Service
-public class MovieServiceImpl implements MovieService {
+public class DefaultMovieService implements MovieService {
     private final MovieDao movieDao;
 
     @Override

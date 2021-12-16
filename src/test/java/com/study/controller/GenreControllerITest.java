@@ -35,10 +35,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration
 class GenreControllerITest {
     List<Genre> list = List.of(
-            Genre.builder().id(1L).name("драма").build(),
-            Genre.builder().id(2L).name("криминал").build(),
-            Genre.builder().id(3L).name("фэнтези").build(),
-            Genre.builder().id(4L).name("детектив").build()
+            new Genre(1L, "драма"),
+            new Genre(2L, "криминал"),
+            new Genre(3L, "фэнтези"),
+            new Genre(4L, "детектив")
     );
 
     @Autowired

@@ -1,10 +1,11 @@
 package com.study.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
-@Builder
+@AllArgsConstructor
+@Getter
 public class Genre {
     private long id;
     private String name;

@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -15,7 +16,7 @@ import java.util.List;
 @Primary
 public class CachedGenreServiceImpl implements GenreService {
     private final GenreServiceImpl genreService;
-    private List<Genre> cache;
+    private volatile List<Genre> cache;
 
     public CachedGenreServiceImpl(GenreServiceImpl genreService) {
         this.genreService = genreService;
@@ -24,7 +25,7 @@ public class CachedGenreServiceImpl implements GenreService {
 
     @Override
     public List<Genre> findAll() {
-        return cache;
+        return new ArrayList<>(cache);
     }
 
     @Scheduled(cron = "* * 0/4 * * *")

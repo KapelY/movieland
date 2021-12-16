@@ -8,4 +8,6 @@ import java.util.List;
 @Service
 public interface MovieService {
     List<Movie> findAll();
+    List<Movie> getRandom();
+    List<Movie> getMoviesByGenre(int id);
 }

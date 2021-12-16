@@ -1,32 +1,49 @@
-package com.study.repository;
+package com.study.repository.impl;
 
 import com.study.entity.Movie;
+import com.study.repository.MovieDao;
+import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.List;
 
 @Repository
-public class MovieDaoImpl implements MovieDao{
-    private static final String GET_ALL_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
+@AllArgsConstructor
+public class MovieDaoImpl implements MovieDao {
+    public static final String GET_ALL_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
             "picture_path FROM movies;";
-    private static final RowMapper<Movie> MOVIE_ROW_MAPPER = new MOVIE_ROW_MAPPER();
+    public static final String GET_RANDOM_MOVIES = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
+            "picture_path FROM movies ORDER BY random() LIMIT 3;";
+    public static final String GET_MOVIES_BY_GENRE = "SELECT id, name_russian, name_native, year_of_release, rating, price, " +
+            "picture_path FROM movies LEFT JOIN movie_genre as mg ON mg.movie_id = movies.id WHERE mg.genre_id=?;";
+    public static final RowMapper<Movie> MOVIE_ROW_MAPPER = new MovieRowMapper();
 
     private JdbcTemplate jdbcTemplate;
-
-    public MovieDaoImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     @Override
     public List<Movie> findAll() {
         return jdbcTemplate.query(GET_ALL_MOVIES, MOVIE_ROW_MAPPER);
     }
 
-    private static class MOVIE_ROW_MAPPER implements RowMapper<Movie> {
+    @Override
+    public List<Movie> getRandom() {
+        return jdbcTemplate.query(GET_RANDOM_MOVIES, MOVIE_ROW_MAPPER);
+    }
+
+    @Override
+    public List<Movie> getMoviesByGenre(int id) {
+        return jdbcTemplate.query(GET_MOVIES_BY_GENRE,
+                new Object[]{id},
+                new int[]{Types.INTEGER},
+                MOVIE_ROW_MAPPER);
+    }
+
+    public static class MovieRowMapper implements RowMapper<Movie> {
         @Override
         public Movie mapRow(ResultSet rs, int rowNum) throws SQLException {
             long id = rs.getLong("id");

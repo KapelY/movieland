@@ -1,8 +1,8 @@
 package com.study.controller;
 
 
-import com.study.entity.Movie;
-import com.study.service.MovieService;
+import com.study.entity.Genre;
+import com.study.service.GenreService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,18 +13,13 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/movie")
-public class MovieController {
-    private final MovieService movieService;
-
+@RequestMapping("/genre")
+public class GenreController {
+    private final GenreService genreService;
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Movie> findAll() {
-        return movieService.findAll();
+    public List<Genre> findAll() {
+        return genreService.findAll();
     }
 
-    @GetMapping(value = "/random", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Movie> randomMovies() {
-        return movieService.getRandom();
-    }
 }
